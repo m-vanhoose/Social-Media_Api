@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-// const thoughtSchema = require('./Thought');
+const thoughtSchema = require('./Thought');
 
 const userSchema = new Schema(
   {
@@ -13,16 +13,20 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      //need email validation
+      validate: {
+        validator: function(v) {
+            return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
+        },
+      },
     },
-    // thoughts: [thoughSchema],
-    friends: [userSchema]
+    thoughts: [thoughSchema],
+    friends: [userSchema],
   },
-//   {
-//     toJSON: {
-//       getters: true,
-//     },
-//   }
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
 );
 
 const User = model('user', userSchema);
