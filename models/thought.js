@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const thoughSchema = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
         type: String,
@@ -9,7 +9,7 @@ const thoughSchema = new Schema(
     },
     createdAt: {
         type: Date,
-        default: Date.now ,
+        default: Date.now,
         //getter method?
     },
     username: {
@@ -20,11 +20,11 @@ const thoughSchema = new Schema(
         //array of docs created by reactionSchema
     }
   },
-//   {
-//     toJSON: {
-//       getters: true,
-//     },
-//   }
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
 );
 
 const Thought = model('thought', thoughtSchema);
